@@ -52,10 +52,9 @@
             this.labelTypes = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabPageStorage = new System.Windows.Forms.TabPage();
-            this.panelStorageFiltres = new System.Windows.Forms.Panel();
             this.dataGridViewStorage = new System.Windows.Forms.DataGridView();
+            this.panelStorageFiltres = new System.Windows.Forms.Panel();
             this.buttonAddNewObject = new System.Windows.Forms.Button();
-            this.toolStripStatusLabelTest = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -67,8 +66,8 @@
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPageStorage.SuspendLayout();
-            this.panelStorageFiltres.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).BeginInit();
+            this.panelStorageFiltres.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -99,8 +98,7 @@
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelViewObjects,
-            this.toolStripStatusLabelTest});
+            this.toolStripStatusLabelViewObjects});
             this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 26);
@@ -308,19 +306,10 @@
             this.tabPageStorage.Location = new System.Drawing.Point(4, 25);
             this.tabPageStorage.Name = "tabPageStorage";
             this.tabPageStorage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStorage.Size = new System.Drawing.Size(792, 365);
+            this.tabPageStorage.Size = new System.Drawing.Size(792, 367);
             this.tabPageStorage.TabIndex = 2;
             this.tabPageStorage.Text = "Storage";
             this.tabPageStorage.UseVisualStyleBackColor = true;
-            // 
-            // panelStorageFiltres
-            // 
-            this.panelStorageFiltres.Controls.Add(this.buttonAddNewObject);
-            this.panelStorageFiltres.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelStorageFiltres.Location = new System.Drawing.Point(3, 3);
-            this.panelStorageFiltres.Name = "panelStorageFiltres";
-            this.panelStorageFiltres.Size = new System.Drawing.Size(200, 359);
-            this.panelStorageFiltres.TabIndex = 0;
             // 
             // dataGridViewStorage
             // 
@@ -330,8 +319,17 @@
             this.dataGridViewStorage.Name = "dataGridViewStorage";
             this.dataGridViewStorage.RowHeadersWidth = 51;
             this.dataGridViewStorage.RowTemplate.Height = 24;
-            this.dataGridViewStorage.Size = new System.Drawing.Size(586, 359);
+            this.dataGridViewStorage.Size = new System.Drawing.Size(586, 361);
             this.dataGridViewStorage.TabIndex = 1;
+            // 
+            // panelStorageFiltres
+            // 
+            this.panelStorageFiltres.Controls.Add(this.buttonAddNewObject);
+            this.panelStorageFiltres.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelStorageFiltres.Location = new System.Drawing.Point(3, 3);
+            this.panelStorageFiltres.Name = "panelStorageFiltres";
+            this.panelStorageFiltres.Size = new System.Drawing.Size(200, 361);
+            this.panelStorageFiltres.TabIndex = 0;
             // 
             // buttonAddNewObject
             // 
@@ -342,12 +340,6 @@
             this.buttonAddNewObject.Text = "Add New Object";
             this.buttonAddNewObject.UseVisualStyleBackColor = true;
             this.buttonAddNewObject.Click += new System.EventHandler(this.buttonAddNewObject_Click);
-            // 
-            // toolStripStatusLabelTest
-            // 
-            this.toolStripStatusLabelTest.Name = "toolStripStatusLabelTest";
-            this.toolStripStatusLabelTest.Size = new System.Drawing.Size(143, 20);
-            this.toolStripStatusLabelTest.Text = "toolStripStatusLabel";
             // 
             // MainForm
             // 
@@ -374,8 +366,8 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.tabPageStorage.ResumeLayout(false);
-            this.panelStorageFiltres.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStorage)).EndInit();
+            this.panelStorageFiltres.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,7 +402,6 @@
         private System.Windows.Forms.Panel panelStorageFiltres;
         private System.Windows.Forms.DataGridView dataGridViewStorage;
         private System.Windows.Forms.Button buttonAddNewObject;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTest;
     }
 }
 

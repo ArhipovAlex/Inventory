@@ -26,6 +26,7 @@ namespace Inventory
             
             LoadOffices();
             dataGridViewOffices.Rows[0].Cells[0].Selected = true;
+            dataGridViewOffices.Columns[0].Visible = false;
             LoadMainObjects();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
             LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
@@ -39,51 +40,33 @@ namespace Inventory
 
         void LoadMainObjects(string condition = null)
         {
-            connection.Open();
-            string cmd = $@"
-SELECT 
-        [Инвентарный номер]             = mainObject_InventarNumber,
-        [Серийный номер]                = mainObject_FactoryNumber,
-        [Бренд]                         = brand_Name,
-        [Модель]                        = model_Name,
-        [Тип устройства]                = type_Name,
-        [Дата производства]             = mainObject_ReleaseDate,
-        [Страна-изготовитель]           = releaseCountry_Name,
-        [Кабинет]                       = office_Name,
-        [Здание]                        = building_Name,
-        [Дата принятия к учету]         = mainObject_DateAccounting,
-        [Дата ввода в эксплуатацию]     = mainObject_DateInToOperation,
-        [Дата вывода из эксплуатации]   = mainObject_DateOutOfOperation,
-        [Причина вывода]                = mainObject_Reason
-
-FROM MainObjects
-JOIN Brands ON  (mainObject_Brand=brand_ID)
-JOIN Models ON  (mainObject_Model=model_ID)
-JOIN Types  ON  (mainObject_Type=type_ID)
-JOIN ReleaseCountries   ON  (mainObject_ReleaseCountry=releaseCountry_ID)
-JOIN Offices    ON  (mainObject_Office=office_ID)
-JOIN Buildings  ON  (office_Building=building_ID)
+            string columns = $@"
+                [Инвентарный номер]             = mainObject_InventarNumber,
+                [Серийный номер]                = mainObject_FactoryNumber,
+                [Бренд]                         = brand_Name,
+                [Модель]                        = model_Name,
+                [Тип устройства]                = type_Name,
+                [Дата производства]             = mainObject_ReleaseDate,
+                [Страна-изготовитель]           = releaseCountry_Name,
+                [Кабинет]                       = office_Name,
+                [Здание]                        = building_Name,
+                [Дата принятия к учету]         = mainObject_DateAccounting,
+                [Дата ввода в эксплуатацию]     = mainObject_DateInToOperation,
+                [Дата вывода из эксплуатации]   = mainObject_DateOutOfOperation,
+                [Причина вывода]                = mainObject_Reason
 ";
-            if (condition != null)
-            {
-                cmd += $" WHERE {condition}";
-            }
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                table.Columns.Add(reader.GetName(i));
-            }
-            while (reader.Read())
-            {
-                DataRow row = table.NewRow();
-                for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
-                table.Rows.Add(row);
-
-            }
-            dataGridViewMainObjects.DataSource = table;
-            connection.Close();
+            string tables = "MainObjects, Brands, Models, Types, ReleaseCountries, Offices, Buildings";
+            string relations = @"mainObject_Brand=brand_ID AND 
+                                    mainObject_Model=model_ID AND
+                                    mainObject_Type=type_ID AND
+                                    mainObject_ReleaseCountry=releaseCountry_ID AND
+                                    mainObject_Office=office_ID AND
+                                    office_Building=building_ID
+";
+            if(condition!=null)condition=$"{relations} AND {condition}";
+            else condition = relations;
+            Connector connector=new Connector();
+            dataGridViewMainObjects.DataSource = connector.LoadColumnFromTable(columns, tables, condition);
             toolStripStatusLabelViewObjects.Text = $"Отображено основных средств {dataGridViewMainObjects.RowCount-1}";
         }
 
@@ -158,8 +141,8 @@ JOIN Buildings  ON  (office_Building=building_ID)
             //change OFFICE-filter
             if (dataGridViewOffices.CurrentRow != null)
             {
-                if (dataGridViewOffices.CurrentRow.Cells[1].FormattedValue.ToString() != "All")
-                condition += $" AND office_Name = '{dataGridViewOffices.CurrentRow.Cells[1].FormattedValue.ToString()}'";
+                if (dataGridViewOffices.CurrentRow.Cells[0].FormattedValue.ToString() != "8")
+                condition += $" AND office_ID = {dataGridViewOffices.CurrentRow.Cells[0].FormattedValue.ToString()}";
             }
             if (condition !=null) LoadMainObjects(condition);
             else LoadMainObjects();
@@ -226,7 +209,6 @@ WHERE mainObject_DateInToOperation is null
 
         private void dataGridViewOffices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            toolStripStatusLabelTest.Text = $"Строка: {dataGridViewOffices.CurrentCell.RowIndex} Значение: {dataGridViewOffices.CurrentRow.Cells[1].FormattedValue}";
             ViewMainObjects();
         }
     }
