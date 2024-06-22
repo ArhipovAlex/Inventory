@@ -24,8 +24,6 @@ namespace Inventory
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
             LoadMainObjects();
-            
-            toolStripStatusLabelAllObjects.Text = $"из {dataGridViewMainObjects.RowCount-1}";
             LoadOffices();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
             LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
@@ -33,6 +31,8 @@ namespace Inventory
             LoadDataToComboBox("Types", "type_Name", comboBoxTypes);
             comboBoxTypes.SelectedIndex = 0;
             dateTimePickerDateIn.Text="1901-01-01";
+            checkBoxVisibleOutOperation.Checked = false;
+            LoadStorage();
         }
 
         void LoadMainObjects(string condition = null)
@@ -117,7 +117,6 @@ JOIN Buildings  ON  (office_Building=building_ID)
             dataGridViewOffices.DataSource = table;
             connection.Close();
         }
-
         void LoadDataToComboBox(string table, string column, ComboBox list)
         {
             string cmd = $"SELECT {column} From {table}";
@@ -130,7 +129,6 @@ JOIN Buildings  ON  (office_Building=building_ID)
             }
             connection.Close();
         }
-
         private void comboBoxBuildings_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxBuildings.SelectedItem.ToString() != "All")
@@ -141,23 +139,6 @@ JOIN Buildings  ON  (office_Building=building_ID)
         }
         void ViewMainObjects()
         {
-            //if (comboBoxTypes.SelectedItem.ToString() != "All" && !checkBoxVisibleOutOperation.Checked)
-            //{
-            //    LoadMainObjects($"(type_Name='{comboBoxTypes.SelectedItem.ToString()}' AND mainObject_DateOutOfOperation is null)");
-            //    return;
-            //}
-            //    if (comboBoxTypes.SelectedItem.ToString() != "All")
-            //{
-            //    LoadMainObjects($"type_Name='{comboBoxTypes.SelectedItem.ToString()}'");
-            //    return;
-            //}
-            //if (!checkBoxVisibleOutOperation.Checked)
-            //{
-            //    LoadMainObjects($"mainObject_DateOutOfOperation is null");
-            //    return;
-            //}
-            //LoadMainObjects();
-
             string condition = null;
             //change TYPE-filter
             if (comboBoxTypes.SelectedItem.ToString() != "All") 
@@ -168,25 +149,64 @@ JOIN Buildings  ON  (office_Building=building_ID)
                 if (condition != null) condition += " AND ";
                 condition += "mainObject_DateOutOfOperation is null";
             }
+            //change Date in OPERATION-filter
             if (condition != null) condition += " AND ";
             condition += $"mainObject_DateInToOperation >= '{dateTimePickerDateIn.Value.ToString("yyyy-MM-dd")}'";
             if (condition !=null) LoadMainObjects(condition);
             else LoadMainObjects();
-
         }
         private void comboBoxTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewMainObjects();
         }
-
         private void checkBoxVisibleOutOperation_CheckedChanged(object sender, EventArgs e)
         {
             ViewMainObjects();
         }
-
         private void dateTimePickerDateIn_ValueChanged(object sender, EventArgs e)
         {
             ViewMainObjects();
+        }
+        void LoadStorage()
+        {
+            connection.Open();
+            string cmd = $@"
+SELECT 
+        [Серийный номер]                = mainObject_FactoryNumber,
+        [Бренд]                         = brand_Name,
+        [Модель]                        = model_Name,
+        [Тип устройства]                = type_Name,
+        [Дата производства]             = mainObject_ReleaseDate,
+        [Страна-изготовитель]           = releaseCountry_Name,
+        [Кабинет]                       = office_Name,
+        [Здание]                        = building_Name,
+        [Дата принятия к учету]         = mainObject_DateAccounting
+
+FROM MainObjects 
+JOIN Brands ON  (mainObject_Brand=brand_ID)
+JOIN Models ON  (mainObject_Model=model_ID)
+JOIN Types  ON  (mainObject_Type=type_ID)
+JOIN ReleaseCountries   ON  (mainObject_ReleaseCountry=releaseCountry_ID)
+JOIN Offices    ON  (mainObject_Office=office_ID)
+JOIN Buildings  ON  (office_Building=building_ID)
+WHERE mainObject_DateInToOperation is null
+";
+            SqlCommand command = new SqlCommand(cmd, connection);
+            reader = command.ExecuteReader();
+            table = new DataTable();
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                table.Columns.Add(reader.GetName(i));
+            }
+            while (reader.Read())
+            {
+                DataRow row = table.NewRow();
+                for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
+                table.Rows.Add(row);
+
+            }
+            dataGridViewStorage.DataSource = table;
+            connection.Close();
         }
     }
 }
