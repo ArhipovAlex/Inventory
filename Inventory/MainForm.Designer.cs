@@ -32,6 +32,9 @@
             this.locationOfObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referencesTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelViewObjects = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelAllObjects = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelTest = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -42,7 +45,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.checkBoxVisibleOutOperation = new System.Windows.Forms.CheckBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerDateIn = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.labelFiltres = new System.Windows.Forms.Label();
             this.labelBuildings = new System.Windows.Forms.Label();
@@ -50,8 +53,7 @@
             this.comboBoxBuildings = new System.Windows.Forms.ComboBox();
             this.labelTypes = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.toolStripStatusLabelViewObjects = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelAllObjects = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tabPageStorage = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -72,20 +74,20 @@
             this.referencesTablesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // locationOfObjectsToolStripMenuItem
             // 
             this.locationOfObjectsToolStripMenuItem.Name = "locationOfObjectsToolStripMenuItem";
-            this.locationOfObjectsToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.locationOfObjectsToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.locationOfObjectsToolStripMenuItem.Text = "File";
             // 
             // referencesTablesToolStripMenuItem
             // 
             this.referencesTablesToolStripMenuItem.Name = "referencesTablesToolStripMenuItem";
-            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
+            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
             this.referencesTablesToolStripMenuItem.Text = "References Tables";
             // 
             // statusStrip1
@@ -93,21 +95,41 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelViewObjects,
-            this.toolStripStatusLabelAllObjects});
+            this.toolStripStatusLabelAllObjects,
+            this.toolStripStatusLabelTest});
             this.statusStrip1.Location = new System.Drawing.Point(0, 424);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 26);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripStatusLabelViewObjects
+            // 
+            this.toolStripStatusLabelViewObjects.Name = "toolStripStatusLabelViewObjects";
+            this.toolStripStatusLabelViewObjects.Size = new System.Drawing.Size(225, 20);
+            this.toolStripStatusLabelViewObjects.Text = "toolStripStatusLabelViewObjects";
+            // 
+            // toolStripStatusLabelAllObjects
+            // 
+            this.toolStripStatusLabelAllObjects.Name = "toolStripStatusLabelAllObjects";
+            this.toolStripStatusLabelAllObjects.Size = new System.Drawing.Size(211, 20);
+            this.toolStripStatusLabelAllObjects.Text = "toolStripStatusLabelAllObjects";
+            // 
+            // toolStripStatusLabelTest
+            // 
+            this.toolStripStatusLabelTest.Name = "toolStripStatusLabelTest";
+            this.toolStripStatusLabelTest.Size = new System.Drawing.Size(151, 20);
+            this.toolStripStatusLabelTest.Text = "toolStripStatusLabel1";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPageStorage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 30);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 394);
+            this.tabControl1.Size = new System.Drawing.Size(800, 396);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage2
@@ -119,9 +141,9 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 365);
+            this.tabPage2.Size = new System.Drawing.Size(792, 367);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Location of Objects";
+            this.tabPage2.Text = "Objects in Operation";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel3
@@ -130,18 +152,19 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(203, 106);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(586, 256);
+            this.panel3.Size = new System.Drawing.Size(586, 258);
             this.panel3.TabIndex = 3;
             // 
             // dataGridViewMainObjects
             // 
             this.dataGridViewMainObjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMainObjects.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewMainObjects.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewMainObjects.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewMainObjects.Name = "dataGridViewMainObjects";
             this.dataGridViewMainObjects.RowHeadersWidth = 51;
             this.dataGridViewMainObjects.RowTemplate.Height = 24;
-            this.dataGridViewMainObjects.Size = new System.Drawing.Size(586, 256);
+            this.dataGridViewMainObjects.Size = new System.Drawing.Size(586, 258);
             this.dataGridViewMainObjects.TabIndex = 0;
             // 
             // splitter2
@@ -166,10 +189,12 @@
             // 
             this.dataGridViewOffices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewOffices.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewOffices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewOffices.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewOffices.Name = "dataGridViewOffices";
             this.dataGridViewOffices.RowHeadersWidth = 51;
             this.dataGridViewOffices.RowTemplate.Height = 24;
+            this.dataGridViewOffices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewOffices.Size = new System.Drawing.Size(586, 100);
             this.dataGridViewOffices.TabIndex = 0;
             // 
@@ -180,13 +205,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 359);
+            this.panel1.Size = new System.Drawing.Size(200, 361);
             this.panel1.TabIndex = 0;
             // 
             // panel4
             // 
             this.panel4.Controls.Add(this.checkBoxVisibleOutOperation);
-            this.panel4.Controls.Add(this.dateTimePicker1);
+            this.panel4.Controls.Add(this.dateTimePickerDateIn);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.labelFiltres);
             this.panel4.Controls.Add(this.labelBuildings);
@@ -209,13 +234,15 @@
             this.checkBoxVisibleOutOperation.TabIndex = 8;
             this.checkBoxVisibleOutOperation.Text = "Visible Out Operation";
             this.checkBoxVisibleOutOperation.UseVisualStyleBackColor = true;
+            this.checkBoxVisibleOutOperation.CheckedChanged += new System.EventHandler(this.checkBoxVisibleOutOperation_CheckedChanged);
             // 
-            // dateTimePicker1
+            // dateTimePickerDateIn
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(6, 135);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(178, 22);
-            this.dateTimePicker1.TabIndex = 7;
+            this.dateTimePickerDateIn.Location = new System.Drawing.Point(6, 135);
+            this.dateTimePickerDateIn.Name = "dateTimePickerDateIn";
+            this.dateTimePickerDateIn.Size = new System.Drawing.Size(178, 22);
+            this.dateTimePickerDateIn.TabIndex = 7;
+            this.dateTimePickerDateIn.ValueChanged += new System.EventHandler(this.dateTimePickerDateIn_ValueChanged);
             // 
             // label1
             // 
@@ -277,21 +304,19 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 359);
+            this.splitter1.Size = new System.Drawing.Size(3, 361);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
-            // toolStripStatusLabelViewObjects
+            // tabPageStorage
             // 
-            this.toolStripStatusLabelViewObjects.Name = "toolStripStatusLabelViewObjects";
-            this.toolStripStatusLabelViewObjects.Size = new System.Drawing.Size(225, 20);
-            this.toolStripStatusLabelViewObjects.Text = "toolStripStatusLabelViewObjects";
-            // 
-            // toolStripStatusLabelAllObjects
-            // 
-            this.toolStripStatusLabelAllObjects.Name = "toolStripStatusLabelAllObjects";
-            this.toolStripStatusLabelAllObjects.Size = new System.Drawing.Size(211, 20);
-            this.toolStripStatusLabelAllObjects.Text = "toolStripStatusLabelAllObjects";
+            this.tabPageStorage.Location = new System.Drawing.Point(4, 25);
+            this.tabPageStorage.Name = "tabPageStorage";
+            this.tabPageStorage.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageStorage.Size = new System.Drawing.Size(792, 367);
+            this.tabPageStorage.TabIndex = 2;
+            this.tabPageStorage.Text = "Storage";
+            this.tabPageStorage.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -343,11 +368,13 @@
         private System.Windows.Forms.Label labelFiltres;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.CheckBox checkBoxVisibleOutOperation;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDateIn;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem referencesTablesToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelViewObjects;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelAllObjects;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelTest;
+        private System.Windows.Forms.TabPage tabPageStorage;
     }
 }
 

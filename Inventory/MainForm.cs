@@ -24,12 +24,15 @@ namespace Inventory
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
             LoadMainObjects();
+            
             toolStripStatusLabelAllObjects.Text = $"из {dataGridViewMainObjects.RowCount-1}";
             LoadOffices();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
             LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
-
+            comboBoxBuildings.SelectedIndex = 0;
             LoadDataToComboBox("Types", "type_Name", comboBoxTypes);
+            comboBoxTypes.SelectedIndex = 0;
+            dateTimePickerDateIn.Text="1901-01-01";
         }
 
         void LoadMainObjects(string condition = null)
@@ -46,6 +49,7 @@ SELECT
         [Страна-изготовитель]           = releaseCountry_Name,
         [Кабинет]                       = office_Name,
         [Здание]                        = building_Name,
+        [Дата принятия к учету]         = mainObject_DateAccounting,
         [Дата ввода в эксплуатацию]     = mainObject_DateInToOperation,
         [Дата вывода из эксплуатации]   = mainObject_DateOutOfOperation,
         [Причина вывода]                = mainObject_Reason
@@ -95,6 +99,7 @@ JOIN Buildings  ON  (office_Building=building_ID)
             {
                 cmd += $" WHERE {condition}";
             }
+            cmd += " ORDER BY Здание, Кабинет";
             SqlCommand command = new SqlCommand(cmd, connection);
             reader = command.ExecuteReader();
             table = new DataTable();
@@ -134,13 +139,54 @@ JOIN Buildings  ON  (office_Building=building_ID)
                 LoadOffices();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
         }
+        void ViewMainObjects()
+        {
+            //if (comboBoxTypes.SelectedItem.ToString() != "All" && !checkBoxVisibleOutOperation.Checked)
+            //{
+            //    LoadMainObjects($"(type_Name='{comboBoxTypes.SelectedItem.ToString()}' AND mainObject_DateOutOfOperation is null)");
+            //    return;
+            //}
+            //    if (comboBoxTypes.SelectedItem.ToString() != "All")
+            //{
+            //    LoadMainObjects($"type_Name='{comboBoxTypes.SelectedItem.ToString()}'");
+            //    return;
+            //}
+            //if (!checkBoxVisibleOutOperation.Checked)
+            //{
+            //    LoadMainObjects($"mainObject_DateOutOfOperation is null");
+            //    return;
+            //}
+            //LoadMainObjects();
 
+            string condition = null;
+            //change TYPE-filter
+            if (comboBoxTypes.SelectedItem.ToString() != "All") 
+                condition+= $"type_Name='{comboBoxTypes.SelectedItem.ToString()}'";
+            //change VISIBLE-filter DEBIT OBJECTS
+            if (!checkBoxVisibleOutOperation.Checked)
+            {
+                if (condition != null) condition += " AND ";
+                condition += "mainObject_DateOutOfOperation is null";
+            }
+            if (condition != null) condition += " AND ";
+            condition += $"mainObject_DateInToOperation >= '{dateTimePickerDateIn.Value.ToString("yyyy-MM-dd")}'";
+            if (condition !=null) LoadMainObjects(condition);
+            else LoadMainObjects();
+
+        }
         private void comboBoxTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBoxTypes.SelectedItem.ToString()!="All")
-                LoadMainObjects($"type_Name='{comboBoxTypes.SelectedItem.ToString()}'");
-            else 
-                LoadMainObjects();
+            ViewMainObjects();
+        }
+
+        private void checkBoxVisibleOutOperation_CheckedChanged(object sender, EventArgs e)
+        {
+            ViewMainObjects();
+        }
+
+        private void dateTimePickerDateIn_ValueChanged(object sender, EventArgs e)
+        {
+            ViewMainObjects();
         }
     }
 }
