@@ -23,8 +23,10 @@ namespace Inventory
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
             connection = new SqlConnection(connectionString);
-            LoadMainObjects();
+            
             LoadOffices();
+            dataGridViewOffices.Rows[0].Cells[0].Selected = true;
+            LoadMainObjects();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
             LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
             comboBoxBuildings.SelectedIndex = 0;
@@ -90,6 +92,7 @@ JOIN Buildings  ON  (office_Building=building_ID)
             connection.Open();
             string cmd = $@"
 SELECT 
+        [ID]        = office_ID,
         [Кабинет]   = office_Name,
         [Здание]    = building_Name
 FROM Offices
@@ -152,6 +155,12 @@ JOIN Buildings  ON  (office_Building=building_ID)
             //change Date in OPERATION-filter
             if (condition != null) condition += " AND ";
             condition += $"mainObject_DateInToOperation >= '{dateTimePickerDateIn.Value.ToString("yyyy-MM-dd")}'";
+            //change OFFICE-filter
+            if (dataGridViewOffices.CurrentRow != null)
+            {
+                if (dataGridViewOffices.CurrentRow.Cells[1].FormattedValue.ToString() != "All")
+                condition += $" AND office_Name = '{dataGridViewOffices.CurrentRow.Cells[1].FormattedValue.ToString()}'";
+            }
             if (condition !=null) LoadMainObjects(condition);
             else LoadMainObjects();
         }
@@ -207,6 +216,18 @@ WHERE mainObject_DateInToOperation is null
             }
             dataGridViewStorage.DataSource = table;
             connection.Close();
+        }
+
+        private void buttonAddNewObject_Click(object sender, EventArgs e)
+        {
+            FormMainObject formMainObject = new FormMainObject();
+            formMainObject.ShowDialog();
+        }
+
+        private void dataGridViewOffices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            toolStripStatusLabelTest.Text = $"Строка: {dataGridViewOffices.CurrentCell.RowIndex} Значение: {dataGridViewOffices.CurrentRow.Cells[1].FormattedValue}";
+            ViewMainObjects();
         }
     }
 }
