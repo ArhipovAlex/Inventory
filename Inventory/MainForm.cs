@@ -15,14 +15,14 @@ namespace Inventory
     public partial class MainForm : Form
     {
         string connectionString;
-        SqlConnection connection;
-        SqlDataReader reader;
-        DataTable table;
+        //SqlConnection connection;
+        //SqlDataReader reader;
+        //DataTable table;
         public MainForm()
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-            connection = new SqlConnection(connectionString);
+            //connection = new SqlConnection(connectionString);
             
             LoadOffices();
             dataGridViewOffices.Rows[0].Cells[0].Selected = true;
@@ -72,48 +72,29 @@ namespace Inventory
 
         void LoadOffices(string condition=null)
         {
-            connection.Open();
-            string cmd = $@"
-SELECT 
-        [ID]        = office_ID,
-        [Кабинет]   = office_Name,
-        [Здание]    = building_Name
-FROM Offices
-JOIN Buildings  ON  (office_Building=building_ID)
+            string columns = $@"
+                    [ID]        = office_ID,
+                    [Кабинет]   = office_Name,
+                    [Здание]    = building_Name
 ";
-            if(condition!=null)
-            {
-                cmd += $" WHERE {condition}";
-            }
-            cmd += " ORDER BY Здание, Кабинет";
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                table.Columns.Add(reader.GetName(i));
-            }
-            while (reader.Read())
-            {
-                DataRow row = table.NewRow();
-                for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
-                table.Rows.Add(row);
-
-            }
-            dataGridViewOffices.DataSource = table;
-            connection.Close();
+            string tables = $@"Offices, Buildings";
+            string relations = $@"office_Building=building_ID";
+            if (condition != null) condition = $"{relations} AND {condition}";
+            else condition = relations;
+            condition += " ORDER BY Здание, Кабинет";
+            Connector connector = new Connector();
+            dataGridViewOffices.DataSource=connector.LoadColumnFromTable(columns,tables, condition);
         }
         void LoadDataToComboBox(string table, string column, ComboBox list)
         {
-            string cmd = $"SELECT {column} From {table}";
-            connection.Open();
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            while(reader.Read()) 
+            Connector connector = new Connector();
+            connector.LoadColumnFromTable(column, table);
+            string[] items = new string[connector.DataTable.Rows.Count];
+            for(int i = 0; i < items.Length; i++)
             {
-                list.Items.Add(reader[0]);
+                items[i] = connector.DataTable.Rows[i][0].ToString();
             }
-            connection.Close();
+            list.Items.AddRange(items);
         }
         private void comboBoxBuildings_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -159,46 +140,31 @@ JOIN Buildings  ON  (office_Building=building_ID)
         {
             ViewMainObjects();
         }
-        void LoadStorage()
+        void LoadStorage(string condition = null)
         {
-            connection.Open();
-            string cmd = $@"
-SELECT 
-        [Серийный номер]                = mainObject_FactoryNumber,
-        [Бренд]                         = brand_Name,
-        [Модель]                        = model_Name,
-        [Тип устройства]                = type_Name,
-        [Дата производства]             = mainObject_ReleaseDate,
-        [Страна-изготовитель]           = releaseCountry_Name,
-        [Кабинет]                       = office_Name,
-        [Здание]                        = building_Name,
-        [Дата принятия к учету]         = mainObject_DateAccounting
-
-FROM MainObjects 
-JOIN Brands ON  (mainObject_Brand=brand_ID)
-JOIN Models ON  (mainObject_Model=model_ID)
-JOIN Types  ON  (mainObject_Type=type_ID)
-JOIN ReleaseCountries   ON  (mainObject_ReleaseCountry=releaseCountry_ID)
-JOIN Offices    ON  (mainObject_Office=office_ID)
-JOIN Buildings  ON  (office_Building=building_ID)
-WHERE mainObject_DateInToOperation is null
+            string columns = $@"
+                    [Серийный номер]                = mainObject_FactoryNumber,
+                    [Бренд]                         = brand_Name,
+                    [Модель]                        = model_Name,
+                    [Тип устройства]                = type_Name,
+                    [Дата производства]             = mainObject_ReleaseDate,
+                    [Страна-изготовитель]           = releaseCountry_Name,
+                    [Кабинет]                       = office_Name,
+                    [Здание]                        = building_Name,
+                    [Дата принятия к учету]         = mainObject_DateAccounting
 ";
-            SqlCommand command = new SqlCommand(cmd, connection);
-            reader = command.ExecuteReader();
-            table = new DataTable();
-            for (int i = 0; i < reader.FieldCount; i++)
-            {
-                table.Columns.Add(reader.GetName(i));
-            }
-            while (reader.Read())
-            {
-                DataRow row = table.NewRow();
-                for (int i = 0; i < reader.FieldCount; i++) row[i] = reader[i];
-                table.Rows.Add(row);
-
-            }
-            dataGridViewStorage.DataSource = table;
-            connection.Close();
+            string tables = $@"MainObjects, Brands, Models, Types, ReleaseCountries, Offices, Buildings";
+            string relations = $@"mainObject_Brand=brand_ID AND 
+                                    mainObject_Model=model_ID AND
+                                    mainObject_Type=type_ID AND
+                                    mainObject_ReleaseCountry=releaseCountry_ID AND
+                                    mainObject_Office=office_ID AND
+                                    office_Building=building_ID
+";
+            if (condition != null) condition = $"mainObject_DateInToOperation is null AND {relations} AND {condition}";
+            else condition = $"mainObject_DateInToOperation is null AND {relations}";
+            Connector connector = new Connector();
+            dataGridViewStorage.DataSource = connector.LoadColumnFromTable(columns,tables,condition);
         }
 
         private void buttonAddNewObject_Click(object sender, EventArgs e)

@@ -22,10 +22,10 @@ namespace Inventory
             connection = new SqlConnection(connectionString);
 
         }
-        public DataTable LoadColumnFromTable(string column,string table,string condition=null)
+        public DataTable LoadColumnFromTable(string columns,string tables,string condition=null)
         {
             connection.Open();
-            string query = $@"SELECT {column} FROM {table}";
+            string query = $@"SELECT {columns} FROM {tables}";
             if(condition != null)
             {
                 query += $" WHERE {condition}";
