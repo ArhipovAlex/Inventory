@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connector.cs" />
+    <Compile Include="FormDataLoader.cs" />
     <Compile Include="FormMainObject.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -46,5 +46,22 @@ namespace Inventory
             connection.Close();
             return DataTable;
         }
+        public void InsertDataToBase(string table, string columns, string values)
+        {
+            string command = $@"INSERT INTO {table}({columns}) VALUES {values}";
+            connection.Open();
+            SqlCommand cmd = new SqlCommand(command, connection);
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
+        public int GetIDbyValue(string table, string columns,string value)
+        {
+            string command =$@"SELECT {columns.Split()[0]} FROM {table} WHERE '{columns.Split()[1]}'='{value}'";
+            connection.Open();
+            SqlCommand cmd=new SqlCommand(command, connection);
+            int id = Convert.ToInt32(cmd.ExecuteScalar());
+            connection.Close();
+            return id;
+        }
     }
 }

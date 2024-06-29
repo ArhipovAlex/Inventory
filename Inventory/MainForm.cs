@@ -15,23 +15,20 @@ namespace Inventory
     public partial class MainForm : Form
     {
         string connectionString;
-        //SqlConnection connection;
-        //SqlDataReader reader;
-        //DataTable table;
+
         public MainForm()
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
-            //connection = new SqlConnection(connectionString);
             
             LoadOffices();
             dataGridViewOffices.Rows[0].Cells[0].Selected = true;
             dataGridViewOffices.Columns[0].Visible = false;
             LoadMainObjects();
             this.dataGridViewOffices.Sort(this.dataGridViewOffices.Columns["Здание"], ListSortDirection.Ascending);
-            LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
+            FormDataLoader.LoadDataToComboBox("Buildings", "building_Name", comboBoxBuildings);
             comboBoxBuildings.SelectedIndex = 0;
-            LoadDataToComboBox("Types", "type_Name", comboBoxTypes);
+            FormDataLoader.LoadDataToComboBox("Types", "type_Name", comboBoxTypes);
             comboBoxTypes.SelectedIndex = 0;
             dateTimePickerDateIn.Text="1901-01-01";
             checkBoxVisibleOutOperation.Checked = false;
@@ -85,6 +82,7 @@ namespace Inventory
             Connector connector = new Connector();
             dataGridViewOffices.DataSource=connector.LoadColumnFromTable(columns,tables, condition);
         }
+        /*
         void LoadDataToComboBox(string table, string column, ComboBox list)
         {
             Connector connector = new Connector();
@@ -95,7 +93,7 @@ namespace Inventory
                 items[i] = connector.DataTable.Rows[i][0].ToString();
             }
             list.Items.AddRange(items);
-        }
+        }*/
         private void comboBoxBuildings_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxBuildings.SelectedItem.ToString() != "All")
