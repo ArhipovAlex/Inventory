@@ -21,12 +21,12 @@ namespace Inventory
             }
             list.Items.AddRange(items);
         }
-        public static void FilterDataComboBox(string table, string column, ComboBox list)
+        public static void FilterDataComboBox(string table, string column, ComboBox list, string condition = null)
         {
             if (list.Text == null)
-                FormDataLoader.LoadDataToComboBox($"{table}", $"{column}", list, $"{column}<>'All'");
+                FormDataLoader.LoadDataToComboBox($"{table}", $"{column}", list, $"{condition} {column}<>'All' ORDER BY {column}");
             else
-                FormDataLoader.LoadDataToComboBox($"{table}", $"{column}", list, $"{column}<>'All' AND {column} LIKE '%{list.Text}%'");
+                FormDataLoader.LoadDataToComboBox($"{table}", $"{column}", list, $"{condition} {column}<>'All' AND {column} LIKE '{list.Text}%' ORDER BY {column}");
             list.SelectionStart = list.Text.Length;
         }
     }

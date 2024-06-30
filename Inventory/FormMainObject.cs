@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,11 @@ namespace Inventory
         public FormMainObject()
         {
             InitializeComponent();
-            FormDataLoader.LoadDataToComboBox("Types","type_Name",comboBoxType,$"type_Name<>'All'");
-            FormDataLoader.LoadDataToComboBox("Brands","brand_Name",comboBoxBrand);
-            FormDataLoader.LoadDataToComboBox("Models","model_Name",comboBoxModel);
-            FormDataLoader.LoadDataToComboBox("ReleaseCountries","releaseCountry_Name",comboBoxReleaseCountry);
-            FormDataLoader.LoadDataToComboBox("Offices","Office_Name",comboBoxOffice,$"office_Name<>'All'");
+            FormDataLoader.FilterDataComboBox("Types","type_Name",comboBoxType);
+            FormDataLoader.FilterDataComboBox("Brands","brand_Name",comboBoxBrand);
+            FormDataLoader.FilterDataComboBox("Models","model_Name",comboBoxModel);
+            FormDataLoader.FilterDataComboBox("ReleaseCountries","releaseCountry_Name",comboBoxReleaseCountry);
+            FormDataLoader.FilterDataComboBox("Offices","office_Name",comboBoxOffice);
         }
 
         private void buttonOK_Click(object sender, EventArgs e)

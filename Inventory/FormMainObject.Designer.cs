@@ -60,7 +60,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 37.29977F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 62.70023F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 167F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
             this.tableLayoutPanel1.Controls.Add(this.labelFactoryNumber, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxFactoryNumber, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.labelType, 0, 1);
@@ -112,7 +112,7 @@
             this.textBoxFactoryNumber.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxFactoryNumber.Location = new System.Drawing.Point(162, 3);
             this.textBoxFactoryNumber.Name = "textBoxFactoryNumber";
-            this.textBoxFactoryNumber.Size = new System.Drawing.Size(262, 22);
+            this.textBoxFactoryNumber.Size = new System.Drawing.Size(261, 22);
             this.textBoxFactoryNumber.TabIndex = 1;
             // 
             // labelType
@@ -132,7 +132,7 @@
             this.comboBoxType.FormattingEnabled = true;
             this.comboBoxType.Location = new System.Drawing.Point(162, 34);
             this.comboBoxType.Name = "comboBoxType";
-            this.comboBoxType.Size = new System.Drawing.Size(262, 24);
+            this.comboBoxType.Size = new System.Drawing.Size(261, 24);
             this.comboBoxType.TabIndex = 3;
             this.comboBoxType.TextChanged += new System.EventHandler(this.comboBoxType_TextChanged);
             // 
@@ -153,7 +153,7 @@
             this.comboBoxBrand.FormattingEnabled = true;
             this.comboBoxBrand.Location = new System.Drawing.Point(162, 65);
             this.comboBoxBrand.Name = "comboBoxBrand";
-            this.comboBoxBrand.Size = new System.Drawing.Size(262, 24);
+            this.comboBoxBrand.Size = new System.Drawing.Size(261, 24);
             this.comboBoxBrand.TabIndex = 5;
             this.comboBoxBrand.TextChanged += new System.EventHandler(this.comboBoxBrand_TextChanged);
             // 
@@ -174,7 +174,7 @@
             this.comboBoxModel.FormattingEnabled = true;
             this.comboBoxModel.Location = new System.Drawing.Point(162, 96);
             this.comboBoxModel.Name = "comboBoxModel";
-            this.comboBoxModel.Size = new System.Drawing.Size(262, 24);
+            this.comboBoxModel.Size = new System.Drawing.Size(261, 24);
             this.comboBoxModel.TabIndex = 7;
             this.comboBoxModel.TextChanged += new System.EventHandler(this.comboBoxModel_TextChanged);
             // 
@@ -194,7 +194,7 @@
             this.dateTimePickerRelease.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimePickerRelease.Location = new System.Drawing.Point(162, 127);
             this.dateTimePickerRelease.Name = "dateTimePickerRelease";
-            this.dateTimePickerRelease.Size = new System.Drawing.Size(262, 22);
+            this.dateTimePickerRelease.Size = new System.Drawing.Size(261, 22);
             this.dateTimePickerRelease.TabIndex = 9;
             // 
             // labelReleaseCountry
@@ -214,7 +214,7 @@
             this.comboBoxReleaseCountry.FormattingEnabled = true;
             this.comboBoxReleaseCountry.Location = new System.Drawing.Point(162, 158);
             this.comboBoxReleaseCountry.Name = "comboBoxReleaseCountry";
-            this.comboBoxReleaseCountry.Size = new System.Drawing.Size(262, 24);
+            this.comboBoxReleaseCountry.Size = new System.Drawing.Size(261, 24);
             this.comboBoxReleaseCountry.TabIndex = 11;
             this.comboBoxReleaseCountry.TextChanged += new System.EventHandler(this.comboBoxReleaseCountry_TextChanged);
             // 
@@ -234,7 +234,7 @@
             this.dateTimePickerAccounting.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dateTimePickerAccounting.Location = new System.Drawing.Point(162, 189);
             this.dateTimePickerAccounting.Name = "dateTimePickerAccounting";
-            this.dateTimePickerAccounting.Size = new System.Drawing.Size(262, 22);
+            this.dateTimePickerAccounting.Size = new System.Drawing.Size(261, 22);
             this.dateTimePickerAccounting.TabIndex = 13;
             // 
             // labelOffice
@@ -254,16 +254,16 @@
             this.comboBoxOffice.FormattingEnabled = true;
             this.comboBoxOffice.Location = new System.Drawing.Point(162, 220);
             this.comboBoxOffice.Name = "comboBoxOffice";
-            this.comboBoxOffice.Size = new System.Drawing.Size(262, 24);
+            this.comboBoxOffice.Size = new System.Drawing.Size(261, 24);
             this.comboBoxOffice.TabIndex = 15;
             this.comboBoxOffice.TextChanged += new System.EventHandler(this.comboBoxOffice_TextChanged);
             // 
             // buttonAddType
             // 
             this.buttonAddType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAddType.Location = new System.Drawing.Point(430, 34);
+            this.buttonAddType.Location = new System.Drawing.Point(429, 34);
             this.buttonAddType.Name = "buttonAddType";
-            this.buttonAddType.Size = new System.Drawing.Size(162, 25);
+            this.buttonAddType.Size = new System.Drawing.Size(163, 25);
             this.buttonAddType.TabIndex = 16;
             this.buttonAddType.Text = "Add New Type";
             this.buttonAddType.UseVisualStyleBackColor = true;
@@ -271,9 +271,9 @@
             // buttonAddBrand
             // 
             this.buttonAddBrand.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAddBrand.Location = new System.Drawing.Point(430, 65);
+            this.buttonAddBrand.Location = new System.Drawing.Point(429, 65);
             this.buttonAddBrand.Name = "buttonAddBrand";
-            this.buttonAddBrand.Size = new System.Drawing.Size(162, 25);
+            this.buttonAddBrand.Size = new System.Drawing.Size(163, 25);
             this.buttonAddBrand.TabIndex = 17;
             this.buttonAddBrand.Text = "Add New Brand";
             this.buttonAddBrand.UseVisualStyleBackColor = true;
@@ -281,9 +281,9 @@
             // buttonAddModel
             // 
             this.buttonAddModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAddModel.Location = new System.Drawing.Point(430, 96);
+            this.buttonAddModel.Location = new System.Drawing.Point(429, 96);
             this.buttonAddModel.Name = "buttonAddModel";
-            this.buttonAddModel.Size = new System.Drawing.Size(162, 25);
+            this.buttonAddModel.Size = new System.Drawing.Size(163, 25);
             this.buttonAddModel.TabIndex = 18;
             this.buttonAddModel.Text = "Add New Model";
             this.buttonAddModel.UseVisualStyleBackColor = true;
@@ -291,9 +291,9 @@
             // buttonAddCountry
             // 
             this.buttonAddCountry.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAddCountry.Location = new System.Drawing.Point(430, 158);
+            this.buttonAddCountry.Location = new System.Drawing.Point(429, 158);
             this.buttonAddCountry.Name = "buttonAddCountry";
-            this.buttonAddCountry.Size = new System.Drawing.Size(162, 25);
+            this.buttonAddCountry.Size = new System.Drawing.Size(163, 25);
             this.buttonAddCountry.TabIndex = 19;
             this.buttonAddCountry.Text = "Add New Country";
             this.buttonAddCountry.UseVisualStyleBackColor = true;
@@ -301,9 +301,9 @@
             // buttonAddOffice
             // 
             this.buttonAddOffice.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAddOffice.Location = new System.Drawing.Point(430, 220);
+            this.buttonAddOffice.Location = new System.Drawing.Point(429, 220);
             this.buttonAddOffice.Name = "buttonAddOffice";
-            this.buttonAddOffice.Size = new System.Drawing.Size(162, 26);
+            this.buttonAddOffice.Size = new System.Drawing.Size(163, 26);
             this.buttonAddOffice.TabIndex = 20;
             this.buttonAddOffice.Text = "Add New Placement";
             this.buttonAddOffice.UseVisualStyleBackColor = true;
