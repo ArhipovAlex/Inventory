@@ -151,7 +151,9 @@
             this.dataGridViewMainObjects.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewMainObjects.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewMainObjects.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewMainObjects.MultiSelect = false;
             this.dataGridViewMainObjects.Name = "dataGridViewMainObjects";
+            this.dataGridViewMainObjects.ReadOnly = true;
             this.dataGridViewMainObjects.RowHeadersWidth = 51;
             this.dataGridViewMainObjects.RowTemplate.Height = 24;
             this.dataGridViewMainObjects.Size = new System.Drawing.Size(586, 258);
@@ -181,7 +183,9 @@
             this.dataGridViewOffices.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewOffices.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewOffices.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewOffices.MultiSelect = false;
             this.dataGridViewOffices.Name = "dataGridViewOffices";
+            this.dataGridViewOffices.ReadOnly = true;
             this.dataGridViewOffices.RowHeadersWidth = 51;
             this.dataGridViewOffices.RowTemplate.Height = 24;
             this.dataGridViewOffices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -316,11 +320,14 @@
             this.dataGridViewStorage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStorage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewStorage.Location = new System.Drawing.Point(203, 3);
+            this.dataGridViewStorage.MultiSelect = false;
             this.dataGridViewStorage.Name = "dataGridViewStorage";
+            this.dataGridViewStorage.ReadOnly = true;
             this.dataGridViewStorage.RowHeadersWidth = 51;
             this.dataGridViewStorage.RowTemplate.Height = 24;
             this.dataGridViewStorage.Size = new System.Drawing.Size(586, 361);
             this.dataGridViewStorage.TabIndex = 1;
+            this.dataGridViewStorage.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewStorage_CellDoubleClick);
             // 
             // panelStorageFiltres
             // 

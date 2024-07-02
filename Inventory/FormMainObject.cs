@@ -22,7 +22,36 @@ namespace Inventory
             FormDataLoader.FilterDataComboBox("ReleaseCountries","releaseCountry_Name",comboBoxReleaseCountry);
             FormDataLoader.FilterDataComboBox("Offices","office_Name",comboBoxOffice);
         }
-
+        public void InitForm
+            (
+            string mainObject_FactoryNumber, string mainObject_Type, string mainObject_Brand, 
+            string mainObject_Model, DateTime mainObject_ReleaseDate, string mainObject_ReleaseCountry, 
+            DateTime mainObject_DateAccounting, string mainObject_Office
+            )
+        {
+            textBoxFactoryNumber.Text = mainObject_FactoryNumber;
+            comboBoxType.SelectedValue = mainObject_Type;
+            comboBoxBrand.SelectedValue = mainObject_Brand;
+            comboBoxModel.SelectedValue = mainObject_Model;
+            dateTimePickerRelease.Value = mainObject_ReleaseDate;
+            comboBoxReleaseCountry.SelectedValue = mainObject_ReleaseCountry;
+            dateTimePickerAccounting.Value = mainObject_DateAccounting;
+            comboBoxOffice.SelectedValue = mainObject_Office;
+        }
+        public void InitForm(DataTable table)
+        {
+            DataRow row = table.Rows[0];
+            Connector connector = new Connector();
+            connector.LoadColumnFromTable("*", "MainObjects", $"mainObject_ID={row["mainObject_ID"]}");
+            textBoxFactoryNumber.Text = row["mainObject_FactoryNumber"].ToString();
+            comboBoxType.SelectedIndex = comboBoxType.FindStringExact(connector.DataTable.Rows[0]["mainObject_Type"].ToString());
+            comboBoxBrand.SelectedValue = row["mainObject_Brand"].ToString();
+            comboBoxModel.SelectedValue = row["mainObject_Model"].ToString();
+            dateTimePickerRelease.Value = DateTime.Parse(row["mainObject_ReleaseDate"].ToString());
+            comboBoxReleaseCountry.SelectedValue = row["mainObject_ReleaseCountry"].ToString();
+            dateTimePickerAccounting.Value = DateTime.Parse(row["mainObject_DateAccounting"].ToString());
+            comboBoxOffice.SelectedValue = row["mainObject_Office"].ToString();
+        }
         private void buttonOK_Click(object sender, EventArgs e)
         {
             Connector connector = new Connector();

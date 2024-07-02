@@ -38,6 +38,7 @@ namespace Inventory
         void LoadMainObjects(string condition = null)
         {
             string columns = $@"
+                [ID]                            = mainObject_ID,
                 [Инвентарный номер]             = mainObject_InventarNumber,
                 [Серийный номер]                = mainObject_FactoryNumber,
                 [Бренд]                         = brand_Name,
@@ -64,6 +65,7 @@ namespace Inventory
             else condition = relations;
             Connector connector=new Connector();
             dataGridViewMainObjects.DataSource = connector.LoadColumnFromTable(columns, tables, condition);
+            dataGridViewMainObjects.Columns[0].Visible = false;
             toolStripStatusLabelViewObjects.Text = $"Отображено основных средств {dataGridViewMainObjects.RowCount-1}";
         }
 
@@ -141,6 +143,7 @@ namespace Inventory
         void LoadStorage(string condition = null)
         {
             string columns = $@"
+                    [ID]                            = mainObject_ID,
                     [Серийный номер]                = mainObject_FactoryNumber,
                     [Бренд]                         = brand_Name,
                     [Модель]                        = model_Name,
@@ -163,6 +166,7 @@ namespace Inventory
             else condition = $"mainObject_DateInToOperation is null AND {relations}";
             Connector connector = new Connector();
             dataGridViewStorage.DataSource = connector.LoadColumnFromTable(columns,tables,condition);
+            dataGridViewStorage.Columns[0].Visible = false;
         }
 
         private void buttonAddNewObject_Click(object sender, EventArgs e)
@@ -174,6 +178,17 @@ namespace Inventory
         private void dataGridViewOffices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             ViewMainObjects();
+        }
+
+        private void dataGridViewStorage_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FormMainObject form = new FormMainObject();
+            int id = Convert.ToInt32(dataGridViewStorage.Rows[0].Cells[0].Value);
+            Connector connector = new Connector();
+            connector.LoadColumnFromTable("*", "MainObjects", $"mainObject_id={id}");
+            FormMainObject formMain = new FormMainObject();
+            form.InitForm(connector.DataTable);
+            form.ShowDialog();
         }
     }
 }
