@@ -37,6 +37,7 @@
             this.textBoxNewItem = new System.Windows.Forms.TextBox();
             this.panelTable = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.buttonOK = new System.Windows.Forms.Button();
             this.panelElements.SuspendLayout();
             this.panelTable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -44,6 +45,7 @@
             // 
             // panelElements
             // 
+            this.panelElements.Controls.Add(this.buttonOK);
             this.panelElements.Controls.Add(this.labelSelectedItem);
             this.panelElements.Controls.Add(this.labelText);
             this.panelElements.Controls.Add(this.buttonDelete);
@@ -134,6 +136,17 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
+            // buttonOK
+            // 
+            this.buttonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonOK.Location = new System.Drawing.Point(12, 299);
+            this.buttonOK.Name = "buttonOK";
+            this.buttonOK.Size = new System.Drawing.Size(270, 32);
+            this.buttonOK.TabIndex = 6;
+            this.buttonOK.Text = "OK";
+            this.buttonOK.UseVisualStyleBackColor = true;
+            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            // 
             // FormReferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -162,5 +175,6 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Label labelSelectedItem;
         private System.Windows.Forms.Label labelText;
+        private System.Windows.Forms.Button buttonOK;
     }
 }

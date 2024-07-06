@@ -107,5 +107,10 @@ namespace Inventory
             labelSelectedItem.Text = "";
             LoadTable(viewTable, $"[ID]={columnID},[Наименование]={viewColumn}", viewCondition);
         }
+
+        private void buttonOK_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

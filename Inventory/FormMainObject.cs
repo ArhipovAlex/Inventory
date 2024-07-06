@@ -80,37 +80,34 @@ namespace Inventory
             }
 
         }
-        /*
-        private void comboBoxType_TextChanged(object sender, EventArgs e)
+
+        private void buttonAddType_Click(object sender, EventArgs e)
         {
+            Connector connector=new Connector();
+            connector.InsertDataToBase("Types", "type_Name", $"'{comboBoxType.Text}'");
             FormDataLoader.FilterDataComboBox("Types", "type_Name", comboBoxType);
         }
 
-        private void comboBoxBrand_TextChanged(object sender, EventArgs e)
+        private void buttonAddBrand_Click(object sender, EventArgs e)
         {
+            Connector connector = new Connector();
+            connector.InsertDataToBase("Brands", "brand_Name", $"'{comboBoxBrand.Text}'");
             FormDataLoader.FilterDataComboBox("Brands", "brand_Name", comboBoxBrand);
         }
 
-        private void comboBoxModel_TextChanged(object sender, EventArgs e)
+        private void buttonAddModel_Click(object sender, EventArgs e)
         {
+            Connector connector = new Connector();
+            connector.InsertDataToBase("Models", "model_Name", $"'{comboBoxModel.Text}'");
             FormDataLoader.FilterDataComboBox("Models", "model_Name", comboBoxModel);
         }
 
-        private void comboBoxReleaseCountry_TextChanged(object sender, EventArgs e)
+        private void buttonAddCountry_Click(object sender, EventArgs e)
         {
+            Connector connector = new Connector();
+            connector.InsertDataToBase("ReleaseCountries", "releaseCountry_Name", $"'{comboBoxReleaseCountry.Text}'");
             FormDataLoader.FilterDataComboBox("ReleaseCountries", "releaseCountry_Name", comboBoxReleaseCountry);
         }
 
-        private void comboBoxOffice_TextChanged(object sender, EventArgs e)
-        {
-            FormDataLoader.FilterDataComboBox("Offices", "office_Name", comboBoxOffice);
-        }
-
-        private void comboBoxType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBoxType.Text=comboBoxType.SelectedIndex.ToString();
-            labelTest.Text = comboBoxType.SelectedItem.ToString();
-        }
-        */
     }
 }

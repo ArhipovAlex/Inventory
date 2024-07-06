@@ -85,14 +85,14 @@
             this.addressTablesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // locationOfObjectsToolStripMenuItem
             // 
             this.locationOfObjectsToolStripMenuItem.Name = "locationOfObjectsToolStripMenuItem";
-            this.locationOfObjectsToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.locationOfObjectsToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
             this.locationOfObjectsToolStripMenuItem.Text = "File";
             // 
             // referencesTablesToolStripMenuItem
@@ -103,7 +103,7 @@
             this.tableModelsToolStripMenuItem,
             this.tableCountriesToolStripMenuItem});
             this.referencesTablesToolStripMenuItem.Name = "referencesTablesToolStripMenuItem";
-            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
             this.referencesTablesToolStripMenuItem.Text = "Reference Tables";
             // 
             // tableTypesToolStripMenuItem
@@ -137,7 +137,7 @@
             // addressTablesToolStripMenuItem
             // 
             this.addressTablesToolStripMenuItem.Name = "addressTablesToolStripMenuItem";
-            this.addressTablesToolStripMenuItem.Size = new System.Drawing.Size(169, 24);
+            this.addressTablesToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.addressTablesToolStripMenuItem.Text = "Addresses Placements";
             // 
             // statusStrip1
@@ -162,10 +162,10 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPageStorage);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Location = new System.Drawing.Point(0, 30);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(800, 396);
+            this.tabControl1.Size = new System.Drawing.Size(800, 394);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage2
@@ -177,7 +177,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 367);
+            this.tabPage2.Size = new System.Drawing.Size(792, 365);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Objects in Operation";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -188,7 +188,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(203, 106);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(586, 258);
+            this.panel3.Size = new System.Drawing.Size(586, 256);
             this.panel3.TabIndex = 3;
             // 
             // dataGridViewMainObjects
@@ -202,7 +202,7 @@
             this.dataGridViewMainObjects.ReadOnly = true;
             this.dataGridViewMainObjects.RowHeadersWidth = 51;
             this.dataGridViewMainObjects.RowTemplate.Height = 24;
-            this.dataGridViewMainObjects.Size = new System.Drawing.Size(586, 258);
+            this.dataGridViewMainObjects.Size = new System.Drawing.Size(586, 256);
             this.dataGridViewMainObjects.TabIndex = 0;
             // 
             // splitter2
@@ -246,7 +246,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 361);
+            this.panel1.Size = new System.Drawing.Size(200, 359);
             this.panel1.TabIndex = 0;
             // 
             // panel4
@@ -345,7 +345,7 @@
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 361);
+            this.splitter1.Size = new System.Drawing.Size(3, 359);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
