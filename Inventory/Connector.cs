@@ -72,6 +72,14 @@ namespace Inventory
             cmd.ExecuteNonQuery();
             connection.Close();
         }
+        public void RemoveDataToBase(string table, string condition)
+        {
+            string command = $@"DELETE FROM {table} WHERE {condition}";
+            connection.Open();
+            SqlCommand cmd=new SqlCommand(command,connection);
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
         public int GetIDbyValue(string table, string columns,string value)
         {
             string command =$@"SELECT {columns.Split(',')[0]} FROM {table} WHERE {columns.Split(',')[1]}='{value}'";

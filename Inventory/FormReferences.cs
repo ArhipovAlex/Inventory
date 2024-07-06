@@ -13,15 +13,24 @@ namespace Inventory
     public partial class FormReferences : Form
     {
         string viewTable;
-        public FormReferences(string table, string columns,string condition=null)
+        string columnID;
+        string viewColumn;
+        string selectedID;
+        string viewCondition;
+        public FormReferences(string formName, string table, string columns,string condition=null)
         {
             InitializeComponent();
             viewTable = table;
-            LoadTable(table, columns, condition);
+            columnID = columns.Split(',')[0];
+            viewColumn = columns.Split(',')[1];
+            viewCondition = condition;
+            //columns = $"[ID]={columns.Split(',')[0]},[Наименование]={columns.Split(',')[1]}";
+            LoadTable(table, $"[ID]={columns.Split(',')[0]},[Наименование]={columns.Split(',')[1]}", condition);
             dataGridView.Columns[0].Visible=false;
             buttonAdd.Enabled=false;
             buttonRename.Enabled=false;
-            buttonDelete.Enabled=false; 
+            buttonDelete.Enabled=false;
+            this.Text = formName;
         }
 
         void LoadTable(string table, string columns, string condition)
@@ -29,12 +38,13 @@ namespace Inventory
             Connector connector = new Connector();
             condition += " ORDER BY Наименование";
             dataGridView.DataSource = connector.LoadColumnFromTable(columns, table, condition);
-            
+            buttonsEnabled();
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             labelSelectedItem.Text=dataGridView.CurrentCell.FormattedValue.ToString();
+            selectedID = dataGridView.CurrentRow.Cells[0].Value.ToString();
             buttonsEnabled();
         }
 
@@ -44,7 +54,7 @@ namespace Inventory
         }
         private void buttonsEnabled()
         {
-            if (textBox1.Text.Length > 0)
+            if (textBoxNewItem.Text.Length > 0)
             {
                 buttonAdd.Enabled = true;
             }
@@ -60,7 +70,7 @@ namespace Inventory
             {
                 buttonDelete.Enabled = false;
             }
-            if ((textBox1.Text.Length > 0) && (labelSelectedItem.Text.Length > 0))
+            if ((textBoxNewItem.Text.Length > 0) && (labelSelectedItem.Text.Length > 0))
             {
                 buttonAdd.Enabled = false;
                 buttonRename.Enabled = true;
@@ -70,6 +80,32 @@ namespace Inventory
             {
                 buttonRename.Enabled = false;
             }
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            Connector connector = new Connector();
+            connector.InsertDataToBase(viewTable, viewColumn, $"'{textBoxNewItem.Text}'");
+            textBoxNewItem.Text = "";
+            LoadTable(viewTable, $"[ID]={columnID},[Наименование]={viewColumn}", viewCondition);
+        }
+
+        private void buttonRename_Click(object sender, EventArgs e)
+        {
+            Connector connector = new Connector();
+            string condition = $"{columnID}={selectedID}";
+            connector.UpdateDataInBase(viewTable,viewColumn, $"'{textBoxNewItem.Text}'", condition);
+            textBoxNewItem.Text = "";
+            labelSelectedItem.Text = "";
+            LoadTable(viewTable, $"[ID]={columnID},[Наименование]={viewColumn}", viewCondition);
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            Connector connector= new Connector();
+            connector.RemoveDataToBase(viewTable, $"{columnID}={selectedID}");
+            labelSelectedItem.Text = "";
+            LoadTable(viewTable, $"[ID]={columnID},[Наименование]={viewColumn}", viewCondition);
         }
     }
 }

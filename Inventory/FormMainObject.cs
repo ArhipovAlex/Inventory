@@ -69,7 +69,7 @@ namespace Inventory
             }
             else
             {
-                string condition = $"mainObject={id}";
+                string condition = $"mainObject_ID={id}";
                 connector.UpdateDataInBase
                     (
                 table,

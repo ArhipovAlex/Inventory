@@ -198,25 +198,25 @@ namespace Inventory
 
         private void tableCountriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormReferences form = new FormReferences("ReleaseCountries", "[ID]=releaseCountry_ID,[Наименование]=releaseCountry_Name");
+            FormReferences form = new FormReferences("Release Countries","ReleaseCountries", "releaseCountry_ID,releaseCountry_Name", "releaseCountry_ID>0");
             form.ShowDialog();
         }
 
         private void tableTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormReferences form = new FormReferences("Types", "[ID]=type_ID,[Наименование]=type_Name","type_ID<>4");
+            FormReferences form = new FormReferences("Types","Types", "type_ID,type_Name","type_ID<>4");
             form.ShowDialog();
         }
 
         private void tableBrandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormReferences form = new FormReferences("Brands", "[ID]=brand_ID,[Наименование]=brand_Name");
+            FormReferences form = new FormReferences("Brands", "Brands", "brand_ID,brand_Name", "brand_ID>0");
             form.ShowDialog();
         }
 
         private void tableModelsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormReferences form = new FormReferences("Models", "[ID]=model_ID,[Наименование]=model_Name");
+            FormReferences form = new FormReferences("Models", "Models", "model_ID,model_Name", "model_ID>0");
             form.ShowDialog();
         }
     }
