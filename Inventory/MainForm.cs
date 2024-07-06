@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.CodeDom;
 
 namespace Inventory
 {
@@ -172,7 +173,11 @@ namespace Inventory
         private void buttonAddNewObject_Click(object sender, EventArgs e)
         {
             FormMainObject formMainObject = new FormMainObject();
-            formMainObject.ShowDialog();
+            DialogResult result= formMainObject.ShowDialog();
+            if(result==DialogResult.OK)
+            {
+                LoadStorage();
+            }
         }
 
         private void dataGridViewOffices_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -188,6 +193,30 @@ namespace Inventory
             connector.LoadColumnFromTable("*", "MainObjects", $"mainObject_id={id}");
             FormMainObject formMain = new FormMainObject();
             form.InitForm(connector.DataTable);
+            form.ShowDialog();
+        }
+
+        private void tableCountriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReferences form = new FormReferences("ReleaseCountries", "[ID]=releaseCountry_ID,[Наименование]=releaseCountry_Name");
+            form.ShowDialog();
+        }
+
+        private void tableTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReferences form = new FormReferences("Types", "[ID]=type_ID,[Наименование]=type_Name","type_ID<>4");
+            form.ShowDialog();
+        }
+
+        private void tableBrandsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReferences form = new FormReferences("Brands", "[ID]=brand_ID,[Наименование]=brand_Name");
+            form.ShowDialog();
+        }
+
+        private void tableModelsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormReferences form = new FormReferences("Models", "[ID]=model_ID,[Наименование]=model_Name");
             form.ShowDialog();
         }
     }

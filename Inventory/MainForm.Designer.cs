@@ -31,6 +31,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.locationOfObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.referencesTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableBrandsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableModelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableCountriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addressTablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelViewObjects = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -54,6 +59,7 @@
             this.tabPageStorage = new System.Windows.Forms.TabPage();
             this.dataGridViewStorage = new System.Windows.Forms.DataGridView();
             this.panelStorageFiltres = new System.Windows.Forms.Panel();
+            this.buttonEnterInToOperation = new System.Windows.Forms.Button();
             this.buttonAddNewObject = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -75,7 +81,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.locationOfObjectsToolStripMenuItem,
-            this.referencesTablesToolStripMenuItem});
+            this.referencesTablesToolStripMenuItem,
+            this.addressTablesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -90,9 +97,48 @@
             // 
             // referencesTablesToolStripMenuItem
             // 
+            this.referencesTablesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableTypesToolStripMenuItem,
+            this.tableBrandsToolStripMenuItem,
+            this.tableModelsToolStripMenuItem,
+            this.tableCountriesToolStripMenuItem});
             this.referencesTablesToolStripMenuItem.Name = "referencesTablesToolStripMenuItem";
-            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
-            this.referencesTablesToolStripMenuItem.Text = "References Tables";
+            this.referencesTablesToolStripMenuItem.Size = new System.Drawing.Size(134, 24);
+            this.referencesTablesToolStripMenuItem.Text = "Reference Tables";
+            // 
+            // tableTypesToolStripMenuItem
+            // 
+            this.tableTypesToolStripMenuItem.Name = "tableTypesToolStripMenuItem";
+            this.tableTypesToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.tableTypesToolStripMenuItem.Text = "Table Types";
+            this.tableTypesToolStripMenuItem.Click += new System.EventHandler(this.tableTypesToolStripMenuItem_Click);
+            // 
+            // tableBrandsToolStripMenuItem
+            // 
+            this.tableBrandsToolStripMenuItem.Name = "tableBrandsToolStripMenuItem";
+            this.tableBrandsToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.tableBrandsToolStripMenuItem.Text = "Table Brands";
+            this.tableBrandsToolStripMenuItem.Click += new System.EventHandler(this.tableBrandsToolStripMenuItem_Click);
+            // 
+            // tableModelsToolStripMenuItem
+            // 
+            this.tableModelsToolStripMenuItem.Name = "tableModelsToolStripMenuItem";
+            this.tableModelsToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.tableModelsToolStripMenuItem.Text = "Table Models";
+            this.tableModelsToolStripMenuItem.Click += new System.EventHandler(this.tableModelsToolStripMenuItem_Click);
+            // 
+            // tableCountriesToolStripMenuItem
+            // 
+            this.tableCountriesToolStripMenuItem.Name = "tableCountriesToolStripMenuItem";
+            this.tableCountriesToolStripMenuItem.Size = new System.Drawing.Size(248, 26);
+            this.tableCountriesToolStripMenuItem.Text = "Table Release Countries";
+            this.tableCountriesToolStripMenuItem.Click += new System.EventHandler(this.tableCountriesToolStripMenuItem_Click);
+            // 
+            // addressTablesToolStripMenuItem
+            // 
+            this.addressTablesToolStripMenuItem.Name = "addressTablesToolStripMenuItem";
+            this.addressTablesToolStripMenuItem.Size = new System.Drawing.Size(169, 24);
+            this.addressTablesToolStripMenuItem.Text = "Addresses Placements";
             // 
             // statusStrip1
             // 
@@ -331,12 +377,22 @@
             // 
             // panelStorageFiltres
             // 
+            this.panelStorageFiltres.Controls.Add(this.buttonEnterInToOperation);
             this.panelStorageFiltres.Controls.Add(this.buttonAddNewObject);
             this.panelStorageFiltres.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelStorageFiltres.Location = new System.Drawing.Point(3, 3);
             this.panelStorageFiltres.Name = "panelStorageFiltres";
             this.panelStorageFiltres.Size = new System.Drawing.Size(200, 361);
             this.panelStorageFiltres.TabIndex = 0;
+            // 
+            // buttonEnterInToOperation
+            // 
+            this.buttonEnterInToOperation.Location = new System.Drawing.Point(6, 40);
+            this.buttonEnterInToOperation.Name = "buttonEnterInToOperation";
+            this.buttonEnterInToOperation.Size = new System.Drawing.Size(188, 31);
+            this.buttonEnterInToOperation.TabIndex = 1;
+            this.buttonEnterInToOperation.Text = "Enter in to Operation";
+            this.buttonEnterInToOperation.UseVisualStyleBackColor = true;
             // 
             // buttonAddNewObject
             // 
@@ -409,6 +465,12 @@
         private System.Windows.Forms.Panel panelStorageFiltres;
         private System.Windows.Forms.DataGridView dataGridViewStorage;
         private System.Windows.Forms.Button buttonAddNewObject;
+        private System.Windows.Forms.ToolStripMenuItem tableTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableBrandsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableModelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableCountriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addressTablesToolStripMenuItem;
+        private System.Windows.Forms.Button buttonEnterInToOperation;
     }
 }
 
